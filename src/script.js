@@ -7,23 +7,19 @@ var students = [
 
 const displayStudents = function(){
   let _students = '';
-  let _femaleStudents = '';
-  let _startsWithA = '';
-  let _noOfMaleStudents = 0;
+  let _femaleStudents = students.filter(student => student.gender === 'female').map(student => student.name);
+  let _startsWithA = students.filter(student => student.name.startsWith('A')).map(student => student.name);
+  
   for(let i of students){
     _students+=`<p>Name: ${i.name} Gender: ${i.gender}<p>`;
-    if(i.gender === 'female')
-        _femaleStudents += `${i.name}, `;
-    if(i.gender === 'male')
-        _noOfMaleStudents+=1;
-    if(i.name.startsWith('A')) _startsWithA += `${i.name}, `;
   }
-  _noOfStudents = `Total male students: ${_noOfMaleStudents}`;
   _femaleStudents = `Female students: [${_femaleStudents}]`;
+  let _totalMaleStudents = `Total male students: ${_startsWithA.length}`
   _startsWithA = `Students name starts with A: [${_startsWithA}]`;
+  
   document.getElementById('femaleStudents').innerText = _femaleStudents;
   document.getElementById('startsWithA').innerText = _startsWithA;
-  document.getElementById('totalMaleStudents').innerText = _noOfStudents;
+  document.getElementById('totalMaleStudents').innerText = _totalMaleStudents;
   document.getElementById('students').innerHTML = _students
 }
 
